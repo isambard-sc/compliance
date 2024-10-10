@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.page {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 1rem;
+  font-size: 1rem;
+}
+
+.pageTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.form > * {
+  margin-bottom: 1rem;
+}
+
+.advancedForm {
+  display: flex;
+  flex-direction: column;
+  background-color: #746fc4;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.advancedTitle {
+  font-size: 1rem;
+  font-weight: bold;
+  color: white;
+}
+
+.advancedForm > * {
+  margin-bottom: 1rem;
+}
+
+.formItem {
+  background-color:rgb(216, 245, 255);
+  padding: 5px;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.formItem > * {
+  margin-bottom: 0.5rem;
+  width: 100%;
+}
+
+.question {
+  font_size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+.validateButton {
+  background-color: #4139bb;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 15px 32px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.generateButton {
+  background-color: #39bb60;
+  border: none;
+  color: white;
+  font-weight: bold;
+  padding: 15px 32px;
+  border-radius: 5px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+}
+
+.countryCheckboxes {
+  max-height: 200px; /* Adjust the height as needed */
+  overflow-y: auto;
+}
+
+.radioLabel {
+  margin-left: 0.5rem;
+}
+
+.checkboxLabel {
+  margin-left: 0.5rem;
+}
+
+.warning {
+  background-color: red;
+  color: white;
+  font-weight: bold;
+  border-radius: 5px;
+  padding: 5px;
+}
+
+.invalidEmail {
+  background-color: #f7b7b7;
+}
+
+.emailWarning {
+  color: red;
+  font-size: small;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}

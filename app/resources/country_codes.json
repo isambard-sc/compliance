@@ -1,0 +1,1172 @@
+[
+  {
+    "Country code": "GB",
+    "Name": "United Kingdom",
+    "Official name": "The United Kingdom of Great Britain and Northern Ireland",
+    "Citizen names": "Briton, British"
+  },
+  {
+    "Country code": "AF",
+    "Name": "Afghanistan",
+    "Official name": "The Islamic Republic of Afghanistan",
+    "Citizen names": "Afghan"
+  },
+  {
+    "Country code": "AL",
+    "Name": "Albania",
+    "Official name": "The Republic of Albania",
+    "Citizen names": "Albanian"
+  },
+  {
+    "Country code": "DZ",
+    "Name": "Algeria",
+    "Official name": "The People's Democratic Republic of Algeria",
+    "Citizen names": "Algerian"
+  },
+  {
+    "Country code": "AD",
+    "Name": "Andorra",
+    "Official name": "The Principality of Andorra",
+    "Citizen names": "Andorran"
+  },
+  {
+    "Country code": "AO",
+    "Name": "Angola",
+    "Official name": "The Republic of Angola",
+    "Citizen names": "Angolan"
+  },
+  {
+    "Country code": "AG",
+    "Name": "Antigua and Barbuda",
+    "Official name": "Antigua and Barbuda",
+    "Citizen names": "Citizen of Antigua and Barbuda"
+  },
+  {
+    "Country code": "AR",
+    "Name": "Argentina",
+    "Official name": "The Argentine Republic",
+    "Citizen names": "Argentine"
+  },
+  {
+    "Country code": "AM",
+    "Name": "Armenia",
+    "Official name": "The Republic of Armenia",
+    "Citizen names": "Armenian"
+  },
+  {
+    "Country code": "AU",
+    "Name": "Australia",
+    "Official name": "The Commonwealth of Australia",
+    "Citizen names": "Australian"
+  },
+  {
+    "Country code": "AT",
+    "Name": "Austria",
+    "Official name": "The Republic of Austria",
+    "Citizen names": "Austrian"
+  },
+  {
+    "Country code": "AZ",
+    "Name": "Azerbaijan",
+    "Official name": "The Republic of Azerbaijan",
+    "Citizen names": "Azerbaijani"
+  },
+  {
+    "Country code": "BH",
+    "Name": "Bahrain",
+    "Official name": "The Kingdom of Bahrain",
+    "Citizen names": "Bahraini"
+  },
+  {
+    "Country code": "BD",
+    "Name": "Bangladesh",
+    "Official name": "The People's Republic of Bangladesh",
+    "Citizen names": "Bangladeshi"
+  },
+  {
+    "Country code": "BB",
+    "Name": "Barbados",
+    "Official name": "Barbados",
+    "Citizen names": "Barbadian"
+  },
+  {
+    "Country code": "BY",
+    "Name": "Belarus",
+    "Official name": "The Republic of Belarus",
+    "Citizen names": "Belarusian"
+  },
+  {
+    "Country code": "BE",
+    "Name": "Belgium",
+    "Official name": "The Kingdom of Belgium",
+    "Citizen names": "Belgian"
+  },
+  {
+    "Country code": "BZ",
+    "Name": "Belize",
+    "Official name": "Belize",
+    "Citizen names": "Belizean"
+  },
+  {
+    "Country code": "BJ",
+    "Name": "Benin",
+    "Official name": "The Republic of Benin",
+    "Citizen names": "Beninese"
+  },
+  {
+    "Country code": "BT",
+    "Name": "Bhutan",
+    "Official name": "The Kingdom of Bhutan",
+    "Citizen names": "Bhutanese"
+  },
+  {
+    "Country code": "BO",
+    "Name": "Bolivia",
+    "Official name": "The Plurinational State of Bolivia",
+    "Citizen names": "Bolivian"
+  },
+  {
+    "Country code": "BA",
+    "Name": "Bosnia and Herzegovina",
+    "Official name": "Bosnia and Herzegovina",
+    "Citizen names": "Citizen of Bosnia and Herzegovina"
+  },
+  {
+    "Country code": "BW",
+    "Name": "Botswana",
+    "Official name": "The Republic of Botswana",
+    "Citizen names": "Botswanan"
+  },
+  {
+    "Country code": "BR",
+    "Name": "Brazil",
+    "Official name": "The Federative Republic of Brazil",
+    "Citizen names": "Brazilian"
+  },
+  {
+    "Country code": "BN",
+    "Name": "Brunei",
+    "Official name": "Brunei Darussalam",
+    "Citizen names": "Bruneian"
+  },
+  {
+    "Country code": "BG",
+    "Name": "Bulgaria",
+    "Official name": "The Republic of Bulgaria",
+    "Citizen names": "Bulgarian"
+  },
+  {
+    "Country code": "BF",
+    "Name": "Burkina Faso",
+    "Official name": "Burkina Faso",
+    "Citizen names": "Burkinan"
+  },
+  {
+    "Country code": "BI",
+    "Name": "Burundi",
+    "Official name": "The Republic of Burundi",
+    "Citizen names": "Burundian"
+  },
+  {
+    "Country code": "KH",
+    "Name": "Cambodia",
+    "Official name": "The Kingdom of Cambodia",
+    "Citizen names": "Cambodian"
+  },
+  {
+    "Country code": "CM",
+    "Name": "Cameroon",
+    "Official name": "The Republic of Cameroon",
+    "Citizen names": "Cameroonian"
+  },
+  {
+    "Country code": "CA",
+    "Name": "Canada",
+    "Official name": "Canada",
+    "Citizen names": "Canadian"
+  },
+  {
+    "Country code": "CV",
+    "Name": "Cape Verde",
+    "Official name": "The Republic of Cabo Verde",
+    "Citizen names": "Cape Verdean"
+  },
+  {
+    "Country code": "CF",
+    "Name": "Central African Republic",
+    "Official name": "The Central African Republic",
+    "Citizen names": "Central African"
+  },
+  {
+    "Country code": "TD",
+    "Name": "Chad",
+    "Official name": "The Republic of Chad",
+    "Citizen names": "Chadian"
+  },
+  {
+    "Country code": "CL",
+    "Name": "Chile",
+    "Official name": "The Republic of Chile",
+    "Citizen names": "Chilean"
+  },
+  {
+    "Country code": "CN",
+    "Name": "China",
+    "Official name": "The People's Republic of China",
+    "Citizen names": "Chinese"
+  },
+  {
+    "Country code": "CO",
+    "Name": "Colombia",
+    "Official name": "The Republic of Colombia",
+    "Citizen names": "Colombian"
+  },
+  {
+    "Country code": "KM",
+    "Name": "Comoros",
+    "Official name": "The Union of the Comoros",
+    "Citizen names": "Comoran"
+  },
+  {
+    "Country code": "CG",
+    "Name": "Congo",
+    "Official name": "The Republic of the Congo",
+    "Citizen names": "Congolese (Republic of the Congo)"
+  },
+  {
+    "Country code": "CD",
+    "Name": "Congo (Democratic Republic)",
+    "Official name": "The Democratic Republic of the Congo",
+    "Citizen names": "Congolese (DRC)"
+  },
+  {
+    "Country code": "CR",
+    "Name": "Costa Rica",
+    "Official name": "The Republic of Costa Rica",
+    "Citizen names": "Costa Rican"
+  },
+  {
+    "Country code": "HR",
+    "Name": "Croatia",
+    "Official name": "The Republic of Croatia",
+    "Citizen names": "Croatian"
+  },
+  {
+    "Country code": "CU",
+    "Name": "Cuba",
+    "Official name": "The Republic of Cuba",
+    "Citizen names": "Cuban"
+  },
+  {
+    "Country code": "CY",
+    "Name": "Cyprus",
+    "Official name": "The Republic of Cyprus",
+    "Citizen names": "Cypriot"
+  },
+  {
+    "Country code": "CZ",
+    "Name": "Czechia",
+    "Official name": "The Czech Republic",
+    "Citizen names": "Czech"
+  },
+  {
+    "Country code": "DK",
+    "Name": "Denmark",
+    "Official name": "The Kingdom of Denmark",
+    "Citizen names": "Danish"
+  },
+  {
+    "Country code": "DJ",
+    "Name": "Djibouti",
+    "Official name": "The Republic of Djibouti",
+    "Citizen names": "Djiboutian"
+  },
+  {
+    "Country code": "DM",
+    "Name": "Dominica",
+    "Official name": "The Commonwealth of Dominica",
+    "Citizen names": "Dominican"
+  },
+  {
+    "Country code": "DO",
+    "Name": "Dominican Republic",
+    "Official name": "The Dominican Republic",
+    "Citizen names": "Citizen of the Dominican Republic"
+  },
+  {
+    "Country code": "TL",
+    "Name": "East Timor",
+    "Official name": "The Democratic Republic of Timor-Leste",
+    "Citizen names": "East Timorese"
+  },
+  {
+    "Country code": "EC",
+    "Name": "Ecuador",
+    "Official name": "The Republic of Ecuador",
+    "Citizen names": "Ecuadorean"
+  },
+  {
+    "Country code": "EG",
+    "Name": "Egypt",
+    "Official name": "The Arab Republic of Egypt",
+    "Citizen names": "Egyptian"
+  },
+  {
+    "Country code": "SV",
+    "Name": "El Salvador",
+    "Official name": "The Republic of El Salvador",
+    "Citizen names": "Salvadorean"
+  },
+  {
+    "Country code": "GQ",
+    "Name": "Equatorial Guinea",
+    "Official name": "The Republic of Equatorial Guinea",
+    "Citizen names": "Equatorial Guinean"
+  },
+  {
+    "Country code": "ER",
+    "Name": "Eritrea",
+    "Official name": "The State of Eritrea",
+    "Citizen names": "Eritrean"
+  },
+  {
+    "Country code": "EE",
+    "Name": "Estonia",
+    "Official name": "The Republic of Estonia",
+    "Citizen names": "Estonian"
+  },
+  {
+    "Country code": "SZ",
+    "Name": "Eswatini",
+    "Official name": "Kingdom of Eswatini",
+    "Citizen names": "Swazi"
+  },
+  {
+    "Country code": "ET",
+    "Name": "Ethiopia",
+    "Official name": "The Federal Democratic Republic of Ethiopia",
+    "Citizen names": "Ethiopian"
+  },
+  {
+    "Country code": "FJ",
+    "Name": "Fiji",
+    "Official name": "The Republic of Fiji",
+    "Citizen names": "Fijian"
+  },
+  {
+    "Country code": "FI",
+    "Name": "Finland",
+    "Official name": "The Republic of Finland",
+    "Citizen names": "Finnish"
+  },
+  {
+    "Country code": "FR",
+    "Name": "France",
+    "Official name": "The French Republic",
+    "Citizen names": "French"
+  },
+  {
+    "Country code": "GA",
+    "Name": "Gabon",
+    "Official name": "The Gabonese Republic",
+    "Citizen names": "Gabonese"
+  },
+  {
+    "Country code": "GE",
+    "Name": "Georgia",
+    "Official name": "Georgia",
+    "Citizen names": "Georgian"
+  },
+  {
+    "Country code": "DE",
+    "Name": "Germany",
+    "Official name": "The Federal Republic of Germany",
+    "Citizen names": "German"
+  },
+  {
+    "Country code": "GH",
+    "Name": "Ghana",
+    "Official name": "The Republic of Ghana",
+    "Citizen names": "Ghanaian"
+  },
+  {
+    "Country code": "GR",
+    "Name": "Greece",
+    "Official name": "The Hellenic Republic",
+    "Citizen names": "Greek"
+  },
+  {
+    "Country code": "GD",
+    "Name": "Grenada",
+    "Official name": "Grenada",
+    "Citizen names": "Grenadian"
+  },
+  {
+    "Country code": "GT",
+    "Name": "Guatemala",
+    "Official name": "The Republic of Guatemala",
+    "Citizen names": "Guatemalan"
+  },
+  {
+    "Country code": "GN",
+    "Name": "Guinea",
+    "Official name": "The Republic of Guinea",
+    "Citizen names": "Guinean"
+  },
+  {
+    "Country code": "GW",
+    "Name": "Guinea-Bissau",
+    "Official name": "The Republic of Guinea-Bissau",
+    "Citizen names": "Citizen of Guinea-Bissau"
+  },
+  {
+    "Country code": "GY",
+    "Name": "Guyana",
+    "Official name": "The Co-operative Republic of Guyana",
+    "Citizen names": "Guyanese"
+  },
+  {
+    "Country code": "HT",
+    "Name": "Haiti",
+    "Official name": "The Republic of Haiti",
+    "Citizen names": "Haitian"
+  },
+  {
+    "Country code": "HN",
+    "Name": "Honduras",
+    "Official name": "The Republic of Honduras",
+    "Citizen names": "Honduran"
+  },
+  {
+    "Country code": "HU",
+    "Name": "Hungary",
+    "Official name": "Hungary",
+    "Citizen names": "Hungarian"
+  },
+  {
+    "Country code": "IS",
+    "Name": "Iceland",
+    "Official name": "Iceland",
+    "Citizen names": "Icelandic"
+  },
+  {
+    "Country code": "IN",
+    "Name": "India",
+    "Official name": "The Republic of India",
+    "Citizen names": "Indian"
+  },
+  {
+    "Country code": "ID",
+    "Name": "Indonesia",
+    "Official name": "The Republic of Indonesia",
+    "Citizen names": "Indonesian"
+  },
+  {
+    "Country code": "IR",
+    "Name": "Iran",
+    "Official name": "The Islamic Republic of Iran",
+    "Citizen names": "Iranian"
+  },
+  {
+    "Country code": "IQ",
+    "Name": "Iraq",
+    "Official name": "The Republic of Iraq",
+    "Citizen names": "Iraqi"
+  },
+  {
+    "Country code": "IE",
+    "Name": "Ireland",
+    "Official name": "Ireland",
+    "Citizen names": "Irish"
+  },
+  {
+    "Country code": "IL",
+    "Name": "Israel",
+    "Official name": "The State of Israel",
+    "Citizen names": "Israeli"
+  },
+  {
+    "Country code": "IT",
+    "Name": "Italy",
+    "Official name": "The Italian Republic",
+    "Citizen names": "Italian"
+  },
+  {
+    "Country code": "CI",
+    "Name": "Ivory Coast",
+    "Official name": "The Republic of Côte D’Ivoire",
+    "Citizen names": "Ivorian"
+  },
+  {
+    "Country code": "JM",
+    "Name": "Jamaica",
+    "Official name": "Jamaica",
+    "Citizen names": "Jamaican"
+  },
+  {
+    "Country code": "JP",
+    "Name": "Japan",
+    "Official name": "Japan",
+    "Citizen names": "Japanese"
+  },
+  {
+    "Country code": "JO",
+    "Name": "Jordan",
+    "Official name": "The Hashemite Kingdom of Jordan",
+    "Citizen names": "Jordanian"
+  },
+  {
+    "Country code": "KZ",
+    "Name": "Kazakhstan",
+    "Official name": "The Republic of Kazakhstan",
+    "Citizen names": "Kazakh"
+  },
+  {
+    "Country code": "KE",
+    "Name": "Kenya",
+    "Official name": "The Republic of Kenya",
+    "Citizen names": "Kenyan"
+  },
+  {
+    "Country code": "KI",
+    "Name": "Kiribati",
+    "Official name": "The Republic of Kiribati",
+    "Citizen names": "Citizen of Kiribati"
+  },
+  {
+    "Country code": "XK",
+    "Name": "Kosovo",
+    "Official name": "The Republic of Kosovo",
+    "Citizen names": "Kosovan"
+  },
+  {
+    "Country code": "KW",
+    "Name": "Kuwait",
+    "Official name": "The State of Kuwait",
+    "Citizen names": "Kuwaiti"
+  },
+  {
+    "Country code": "KG",
+    "Name": "Kyrgyzstan",
+    "Official name": "The Kyrgyz Republic",
+    "Citizen names": "Kyrgyz"
+  },
+  {
+    "Country code": "LA",
+    "Name": "Laos",
+    "Official name": "The Lao People's Democratic Republic",
+    "Citizen names": "Lao"
+  },
+  {
+    "Country code": "LV",
+    "Name": "Latvia",
+    "Official name": "The Republic of Latvia",
+    "Citizen names": "Latvian"
+  },
+  {
+    "Country code": "LB",
+    "Name": "Lebanon",
+    "Official name": "The Lebanese Republic",
+    "Citizen names": "Lebanese"
+  },
+  {
+    "Country code": "LS",
+    "Name": "Lesotho",
+    "Official name": "The Kingdom of Lesotho",
+    "Citizen names": "Citizen of Lesotho"
+  },
+  {
+    "Country code": "LR",
+    "Name": "Liberia",
+    "Official name": "The Republic of Liberia",
+    "Citizen names": "Liberian"
+  },
+  {
+    "Country code": "LY",
+    "Name": "Libya",
+    "Official name": "State of Libya",
+    "Citizen names": "Libyan"
+  },
+  {
+    "Country code": "LI",
+    "Name": "Liechtenstein",
+    "Official name": "The Principality of Liechtenstein",
+    "Citizen names": "Liechtenstein citizen"
+  },
+  {
+    "Country code": "LT",
+    "Name": "Lithuania",
+    "Official name": "The Republic of Lithuania",
+    "Citizen names": "Lithuanian"
+  },
+  {
+    "Country code": "LU",
+    "Name": "Luxembourg",
+    "Official name": "The Grand Duchy of Luxembourg",
+    "Citizen names": "Luxembourger"
+  },
+  {
+    "Country code": "MG",
+    "Name": "Madagascar",
+    "Official name": "The Republic of Madagascar",
+    "Citizen names": "Citizen of Madagascar"
+  },
+  {
+    "Country code": "MW",
+    "Name": "Malawi",
+    "Official name": "The Republic of Malawi",
+    "Citizen names": "Malawian"
+  },
+  {
+    "Country code": "MY",
+    "Name": "Malaysia",
+    "Official name": "Malaysia",
+    "Citizen names": "Malaysian"
+  },
+  {
+    "Country code": "MV",
+    "Name": "Maldives",
+    "Official name": "The Republic of Maldives",
+    "Citizen names": "Maldivian"
+  },
+  {
+    "Country code": "ML",
+    "Name": "Mali",
+    "Official name": "The Republic of Mali",
+    "Citizen names": "Malian"
+  },
+  {
+    "Country code": "MT",
+    "Name": "Malta",
+    "Official name": "The Republic of Malta",
+    "Citizen names": "Maltese"
+  },
+  {
+    "Country code": "MH",
+    "Name": "Marshall Islands",
+    "Official name": "The Republic of the Marshall Islands",
+    "Citizen names": "Marshallese"
+  },
+  {
+    "Country code": "MR",
+    "Name": "Mauritania",
+    "Official name": "The Islamic Republic of Mauritania",
+    "Citizen names": "Mauritanian"
+  },
+  {
+    "Country code": "MU",
+    "Name": "Mauritius",
+    "Official name": "The Republic of Mauritius",
+    "Citizen names": "Mauritian"
+  },
+  {
+    "Country code": "MX",
+    "Name": "Mexico",
+    "Official name": "The United Mexican States",
+    "Citizen names": "Mexican"
+  },
+  {
+    "Country code": "FM",
+    "Name": "Federated States of Micronesia",
+    "Official name": "Federated States of Micronesia",
+    "Citizen names": "Micronesian"
+  },
+  {
+    "Country code": "MD",
+    "Name": "Moldova",
+    "Official name": "The Republic of Moldova",
+    "Citizen names": "Moldovan"
+  },
+  {
+    "Country code": "MC",
+    "Name": "Monaco",
+    "Official name": "The Principality of Monaco",
+    "Citizen names": "Monegasque"
+  },
+  {
+    "Country code": "MN",
+    "Name": "Mongolia",
+    "Official name": "Mongolia",
+    "Citizen names": "Mongolian"
+  },
+  {
+    "Country code": "ME",
+    "Name": "Montenegro",
+    "Official name": "Montenegro",
+    "Citizen names": "Montenegrin"
+  },
+  {
+    "Country code": "MA",
+    "Name": "Morocco",
+    "Official name": "The Kingdom of Morocco",
+    "Citizen names": "Moroccan"
+  },
+  {
+    "Country code": "MZ",
+    "Name": "Mozambique",
+    "Official name": "The Republic of Mozambique",
+    "Citizen names": "Mozambican"
+  },
+  {
+    "Country code": "MM",
+    "Name": "Myanmar (Burma)",
+    "Official name": "The Republic of the Union of Myanmar",
+    "Citizen names": "Citizen of Myanmar"
+  },
+  {
+    "Country code": "NA",
+    "Name": "Namibia",
+    "Official name": "The Republic of Namibia",
+    "Citizen names": "Namibian"
+  },
+  {
+    "Country code": "NR",
+    "Name": "Nauru",
+    "Official name": "The Republic of Nauru",
+    "Citizen names": "Nauruan"
+  },
+  {
+    "Country code": "NP",
+    "Name": "Nepal",
+    "Official name": "Nepal",
+    "Citizen names": "Nepalese"
+  },
+  {
+    "Country code": "NL",
+    "Name": "Netherlands",
+    "Official name": "The Kingdom of the Netherlands",
+    "Citizen names": "Dutch"
+  },
+  {
+    "Country code": "NZ",
+    "Name": "New Zealand",
+    "Official name": "New Zealand",
+    "Citizen names": "New Zealander"
+  },
+  {
+    "Country code": "NI",
+    "Name": "Nicaragua",
+    "Official name": "The Republic of Nicaragua",
+    "Citizen names": "Nicaraguan"
+  },
+  {
+    "Country code": "NE",
+    "Name": "Niger",
+    "Official name": "The Republic of Niger",
+    "Citizen names": "Nigerien"
+  },
+  {
+    "Country code": "NG",
+    "Name": "Nigeria",
+    "Official name": "The Federal Republic of Nigeria",
+    "Citizen names": "Nigerian"
+  },
+  {
+    "Country code": "KP",
+    "Name": "North Korea",
+    "Official name": "The Democratic People's Republic of Korea",
+    "Citizen names": "North Korean"
+  },
+  {
+    "Country code": "MK",
+    "Name": "North Macedonia",
+    "Official name": "Republic of North Macedonia",
+    "Citizen names": "Macedonian"
+  },
+  {
+    "Country code": "NO",
+    "Name": "Norway",
+    "Official name": "The Kingdom of Norway",
+    "Citizen names": "Norwegian"
+  },
+  {
+    "Country code": "OM",
+    "Name": "Oman",
+    "Official name": "The Sultanate of Oman",
+    "Citizen names": "Omani"
+  },
+  {
+    "Country code": "PK",
+    "Name": "Pakistan",
+    "Official name": "The Islamic Republic of Pakistan",
+    "Citizen names": "Pakistani"
+  },
+  {
+    "Country code": "PW",
+    "Name": "Palau",
+    "Official name": "The Republic of Palau",
+    "Citizen names": "Palauan"
+  },
+  {
+    "Country code": "PA",
+    "Name": "Panama",
+    "Official name": "The Republic of Panama",
+    "Citizen names": "Panamanian"
+  },
+  {
+    "Country code": "PG",
+    "Name": "Papua New Guinea",
+    "Official name": "The Independent State of Papua New Guinea",
+    "Citizen names": "Papua New Guinean"
+  },
+  {
+    "Country code": "PY",
+    "Name": "Paraguay",
+    "Official name": "The Republic of Paraguay",
+    "Citizen names": "Paraguayan"
+  },
+  {
+    "Country code": "PE",
+    "Name": "Peru",
+    "Official name": "The Republic of Peru",
+    "Citizen names": "Peruvian"
+  },
+  {
+    "Country code": "PH",
+    "Name": "Philippines",
+    "Official name": "The Republic of the Philippines",
+    "Citizen names": "Filipino"
+  },
+  {
+    "Country code": "PL",
+    "Name": "Poland",
+    "Official name": "The Republic of Poland",
+    "Citizen names": "Polish"
+  },
+  {
+    "Country code": "PT",
+    "Name": "Portugal",
+    "Official name": "The Portuguese Republic",
+    "Citizen names": "Portuguese"
+  },
+  {
+    "Country code": "QA",
+    "Name": "Qatar",
+    "Official name": "The State of Qatar",
+    "Citizen names": "Qatari"
+  },
+  {
+    "Country code": "RO",
+    "Name": "Romania",
+    "Official name": "Romania",
+    "Citizen names": "Romanian"
+  },
+  {
+    "Country code": "RU",
+    "Name": "Russia",
+    "Official name": "The Russian Federation",
+    "Citizen names": "Russian"
+  },
+  {
+    "Country code": "RW",
+    "Name": "Rwanda",
+    "Official name": "The Republic of Rwanda",
+    "Citizen names": "Rwandan"
+  },
+  {
+    "Country code": "KN",
+    "Name": "St Kitts and Nevis",
+    "Official name": "The Federation of Saint Christopher and Nevis",
+    "Citizen names": "Citizen of St Christopher (St Kitts) and Nevis"
+  },
+  {
+    "Country code": "LC",
+    "Name": "St Lucia",
+    "Official name": "Saint Lucia",
+    "Citizen names": "St Lucian"
+  },
+  {
+    "Country code": "VC",
+    "Name": "St Vincent",
+    "Official name": "Saint Vincent and the Grenadines",
+    "Citizen names": "Vincentian"
+  },
+  {
+    "Country code": "WS",
+    "Name": "Samoa",
+    "Official name": "The Independent State of Samoa",
+    "Citizen names": "Samoan"
+  },
+  {
+    "Country code": "SM",
+    "Name": "San Marino",
+    "Official name": "The Republic of San Marino",
+    "Citizen names": "San Marinese"
+  },
+  {
+    "Country code": "ST",
+    "Name": "Sao Tome and Principe",
+    "Official name": "The Democratic Republic of Sao Tome and Principe",
+    "Citizen names": "Sao Tomean"
+  },
+  {
+    "Country code": "SA",
+    "Name": "Saudi Arabia",
+    "Official name": "The Kingdom of Saudi Arabia",
+    "Citizen names": "Saudi Arabian"
+  },
+  {
+    "Country code": "SN",
+    "Name": "Senegal",
+    "Official name": "The Republic of Senegal",
+    "Citizen names": "Senegalese"
+  },
+  {
+    "Country code": "RS",
+    "Name": "Serbia",
+    "Official name": "The Republic of Serbia",
+    "Citizen names": "Serbian"
+  },
+  {
+    "Country code": "SC",
+    "Name": "Seychelles",
+    "Official name": "The Republic of Seychelles",
+    "Citizen names": "Citizen of Seychelles"
+  },
+  {
+    "Country code": "SL",
+    "Name": "Sierra Leone",
+    "Official name": "The Republic of Sierra Leone",
+    "Citizen names": "Sierra Leonean"
+  },
+  {
+    "Country code": "SG",
+    "Name": "Singapore",
+    "Official name": "The Republic of Singapore",
+    "Citizen names": "Singaporean"
+  },
+  {
+    "Country code": "SK",
+    "Name": "Slovakia",
+    "Official name": "The Slovak Republic",
+    "Citizen names": "Slovak"
+  },
+  {
+    "Country code": "SI",
+    "Name": "Slovenia",
+    "Official name": "The Republic of Slovenia",
+    "Citizen names": "Slovenian"
+  },
+  {
+    "Country code": "SB",
+    "Name": "Solomon Islands",
+    "Official name": "Solomon Islands",
+    "Citizen names": "Solomon Islander"
+  },
+  {
+    "Country code": "SO",
+    "Name": "Somalia",
+    "Official name": "Federal Republic of Somalia",
+    "Citizen names": "Somali"
+  },
+  {
+    "Country code": "ZA",
+    "Name": "South Africa",
+    "Official name": "The Republic of South Africa",
+    "Citizen names": "South African"
+  },
+  {
+    "Country code": "KR",
+    "Name": "South Korea",
+    "Official name": "The Republic of Korea",
+    "Citizen names": "South Korean"
+  },
+  {
+    "Country code": "SS",
+    "Name": "South Sudan",
+    "Official name": "The Republic of South Sudan",
+    "Citizen names": "South Sudanese"
+  },
+  {
+    "Country code": "ES",
+    "Name": "Spain",
+    "Official name": "The Kingdom of Spain",
+    "Citizen names": "Spanish"
+  },
+  {
+    "Country code": "LK",
+    "Name": "Sri Lanka",
+    "Official name": "The Democratic Socialist Republic of Sri Lanka",
+    "Citizen names": "Sri Lankan"
+  },
+  {
+    "Country code": "SD",
+    "Name": "Sudan",
+    "Official name": "The Republic of the Sudan",
+    "Citizen names": "Sudanese"
+  },
+  {
+    "Country code": "SR",
+    "Name": "Suriname",
+    "Official name": "The Republic of Suriname",
+    "Citizen names": "Surinamese"
+  },
+  {
+    "Country code": "SE",
+    "Name": "Sweden",
+    "Official name": "The Kingdom of Sweden",
+    "Citizen names": "Swedish"
+  },
+  {
+    "Country code": "CH",
+    "Name": "Switzerland",
+    "Official name": "The Swiss Confederation",
+    "Citizen names": "Swiss"
+  },
+  {
+    "Country code": "SY",
+    "Name": "Syria",
+    "Official name": "The Syrian Arab Republic",
+    "Citizen names": "Syrian"
+  },
+  {
+    "Country code": "TJ",
+    "Name": "Tajikistan",
+    "Official name": "The Republic of Tajikistan",
+    "Citizen names": "Tajik"
+  },
+  {
+    "Country code": "TZ",
+    "Name": "Tanzania",
+    "Official name": "The United Republic of Tanzania",
+    "Citizen names": "Tanzanian"
+  },
+  {
+    "Country code": "TH",
+    "Name": "Thailand",
+    "Official name": "The Kingdom of Thailand",
+    "Citizen names": "Thai"
+  },
+  {
+    "Country code": "BS",
+    "Name": "The Bahamas",
+    "Official name": "The Commonwealth of The Bahamas",
+    "Citizen names": "Bahamian"
+  },
+  {
+    "Country code": "GM",
+    "Name": "The Gambia",
+    "Official name": "The Republic of The Gambia",
+    "Citizen names": "Gambian"
+  },
+  {
+    "Country code": "TG",
+    "Name": "Togo",
+    "Official name": "The Togolese Republic",
+    "Citizen names": "Togolese"
+  },
+  {
+    "Country code": "TO",
+    "Name": "Tonga",
+    "Official name": "The Kingdom of Tonga",
+    "Citizen names": "Tongan"
+  },
+  {
+    "Country code": "TT",
+    "Name": "Trinidad and Tobago",
+    "Official name": "The Republic of Trinidad and Tobago",
+    "Citizen names": "Trinidad and Tobago citizen"
+  },
+  {
+    "Country code": "TN",
+    "Name": "Tunisia",
+    "Official name": "Republic of Tunisia",
+    "Citizen names": "Tunisian"
+  },
+  {
+    "Country code": "TR",
+    "Name": "Turkey",
+    "Official name": "Republic of Türkiye",
+    "Citizen names": "Turk, Turkish"
+  },
+  {
+    "Country code": "TM",
+    "Name": "Turkmenistan",
+    "Official name": "Turkmenistan",
+    "Citizen names": "Turkmen"
+  },
+  {
+    "Country code": "TV",
+    "Name": "Tuvalu",
+    "Official name": "Tuvalu",
+    "Citizen names": "Tuvaluan"
+  },
+  {
+    "Country code": "UG",
+    "Name": "Uganda",
+    "Official name": "The Republic of Uganda",
+    "Citizen names": "Ugandan"
+  },
+  {
+    "Country code": "UA",
+    "Name": "Ukraine",
+    "Official name": "Ukraine",
+    "Citizen names": "Ukrainian"
+  },
+  {
+    "Country code": "AE",
+    "Name": "United Arab Emirates",
+    "Official name": "The United Arab Emirates",
+    "Citizen names": "Citizen of the United Arab Emirates"
+  },
+  {
+    "Country code": "US",
+    "Name": "United States",
+    "Official name": "The United States of America",
+    "Citizen names": "American"
+  },
+  {
+    "Country code": "UY",
+    "Name": "Uruguay",
+    "Official name": "The Oriental Republic of Uruguay",
+    "Citizen names": "Uruguayan"
+  },
+  {
+    "Country code": "UZ",
+    "Name": "Uzbekistan",
+    "Official name": "The Republic of Uzbekistan",
+    "Citizen names": "Uzbek"
+  },
+  {
+    "Country code": "VU",
+    "Name": "Vanuatu",
+    "Official name": "The Republic of Vanuatu",
+    "Citizen names": "Citizen of Vanuatu"
+  },
+  {
+    "Country code": "VA",
+    "Name": "Vatican City",
+    "Official name": "Vatican City State",
+    "Citizen names": "Vatican citizen"
+  },
+  {
+    "Country code": "VE",
+    "Name": "Venezuela",
+    "Official name": "The Bolivarian Republic of Venezuela",
+    "Citizen names": "Venezuelan"
+  },
+  {
+    "Country code": "VN",
+    "Name": "Vietnam",
+    "Official name": "The Socialist Republic of Viet Nam",
+    "Citizen names": "Vietnamese"
+  },
+  {
+    "Country code": "YE",
+    "Name": "Yemen",
+    "Official name": "The Republic of Yemen",
+    "Citizen names": "Yemeni"
+  },
+  {
+    "Country code": "ZM",
+    "Name": "Zambia",
+    "Official name": "The Republic of Zambia",
+    "Citizen names": "Zambian"
+  },
+  {
+    "Country code": "ZW",
+    "Name": "Zimbabwe",
+    "Official name": "The Republic of Zimbabwe",
+    "Citizen names": "Zimbabwean"
+  }
+]
