@@ -127,6 +127,14 @@ body {
   padding: 5px;
 }
 
+.grantSuccess {
+  font-size: 8pt;
+}
+
+.grantSuccess a {
+  color: #4139bb;
+}
+
 .invalidEmail {
   background-color: #f7b7b7;
 }

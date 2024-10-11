@@ -2,22 +2,116 @@
 
 import { useState } from 'react';
 import validator from 'validator';
+import axios from 'axios';
 
 import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 
 import countryCodes from './resources/country_codes.json';
+import { encode } from 'punycode';
 
 ///
 /// Functions that handle changes in state
 ///
 
-function isValidGrant(grant: string) {
-  if (grant === "") {
-    return false;
+interface GrantDetails {
+  identifier?: string;
+  url?: string;
+  xml_url?: string;
+}
+
+
+function isValidGrant(grant: string, onUpdate: (value: boolean) => void,
+  current_grant_details: GrantDetails,
+  setGrantDetails: (details: GrantDetails) => void) {
+
+  const grant_details: GrantDetails = {};
+
+  if (grant === "" || grant === undefined || grant === null || grant.length === 0) {
+    onUpdate(false);
+    setGrantDetails(grant_details);
+    return;
   }
 
-  return true;
+  if (grant.length > 16) {
+    onUpdate(false);
+    setGrantDetails(grant_details);
+    return;
+  }
+
+  if (grant === current_grant_details.identifier) {
+    // we don't need to check the grant again
+    console.log("Skipping grant check - already validated");
+    onUpdate(true);
+    return;
+  }
+
+  // look up the UKRI grant using an axios call to the UKRI API
+  // if the grant is valid, return true
+  // otherwise, return false
+  const url = `https://gtr.ukri.org/gtr/api/projects?q=${encodeURIComponent(grant)}`;
+
+  console.log("Looking up grant code: " + grant + " at " + url);
+
+  const config = axios.defaults.headers.common;
+  config.Accept = 'application/vnd.rcuk.gtr.json-v7';
+
+  axios.get(url, {
+    headers: {
+      Accept: 'application/vnd.rcuk.gtr.json-v7'
+    }
+  }).then((response) => {
+    if (response.data.project.length === 0) {
+      console.log("No matching grant found?");
+      onUpdate(false);
+      setGrantDetails(grant_details);
+      return;
+    }
+    else {
+      try {
+        // look for response[0].identifiers.identifier[0].value
+        const value = response.data.project[0].identifiers.identifier[0].value;
+
+        if (value === grant) {
+          // they match - this is the valid grant code
+          grant_details.identifier = value;
+          grant_details.url = `https://gtr.ukri.org/projects?ref=${encodeURIComponent(value)}`;
+
+          try {
+            grant_details.xml_url = response.data.project[0].href;
+          } catch (error) {
+            console.log("No XML URL found " + error);
+          }
+
+          onUpdate(true);
+          setGrantDetails(grant_details);
+          return;
+        }
+        else {
+          console.log("Grant code does not match: " + value + " vs " + grant);
+          console.log(response.data);
+          onUpdate(false);
+          setGrantDetails(grant_details);
+          return;
+        }
+      }
+      catch (error) {
+        console.log("Invalid grant");
+        console.log(response.data);
+        console.log(error);
+        onUpdate(false);
+        setGrantDetails(grant_details);
+        return;
+      }
+    }
+  })
+    .catch((error) => {
+      console.log("Cannot reach UKRI API");
+      console.log(error);
+      onUpdate(false);
+      setGrantDetails(grant_details);
+      return;
+    });
 }
 
 function handleCountryChange(countryCode: string, checked: boolean,
@@ -198,23 +292,39 @@ function InstitutionDialog({ value, onUpdate, warnings }: InstitutionDialogProps
 interface GrantDialogProps {
   value: string;
   onUpdate: (value: string) => void;
+  grant_details: GrantDetails;
   warnings: Warnings;
 }
 
-function GrantDialog({ value, onUpdate, warnings }: GrantDialogProps) {
+function GrantDialog({ value, onUpdate, grant_details, warnings }: GrantDialogProps) {
   let warning = null;
 
   if (warnings["grant"] !== undefined) {
     warning = <div className="warning">{warnings["grant"]}</div>;
   }
 
+  let details = null;
+
+  if (grant_details.identifier !== undefined) {
+    details = (
+      <div className="grantDetails">
+        <div className="grantSuccess">
+          <a href={grant_details.url} target="_blank">Validated {grant_details.identifier}</a>.
+          <a href={grant_details.xml_url} target="_blank">View metadata.</a>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="formItem">
       <div className="question">If your project has a UKRI grant code associated with it, please
-        enter it here. Otherwise, leave this field blank.
+        enter it here. Only enter a single grant code. If your project does not have a
+        UKRI grant associated, then leave this field blank.
       </div>
       {warning}
       <input type="text" onChange={(obj) => onUpdate(obj.target.value)} value={value} />
+      {details}
     </div>
   );
 }
@@ -572,6 +682,8 @@ export default function MyApp() {
   const [sectors, setSectors] = useState({});
   const [show_advanced, setShowAdvanced] = useState(false);
   const [show_sectors, setShowSectors] = useState(false);
+  const [is_valid_grant, setIsValidGrant] = useState(false);
+  const [grant_details, setGrantDetails] = useState({});
 
   const [warnings, setWarnings] = useState<Warnings>({});
   const [is_valid, setIsValid] = useState(false);
@@ -611,6 +723,25 @@ export default function MyApp() {
     );
   }
 
+  let grant_checked_now_to_be_valid = false;
+
+  const onCheckGrant = () => {
+
+    const onUpdate = (value: boolean) => {
+      if (value) {
+        setIsValidGrant(true);
+        grant_checked_now_to_be_valid = true;
+        onValidate();
+      } else {
+        setIsValidGrant(false);
+        grant_checked_now_to_be_valid = false;
+        onValidate();
+      }
+    }
+
+    isValidGrant(grant, onUpdate, grant_details, setGrantDetails);
+  }
+
   const onValidate = () => {
     const warnings: Warnings = {};
     let is_valid = true;
@@ -637,7 +768,7 @@ export default function MyApp() {
 
     let should_show_advanced = show_advanced;
 
-    if (isValidGrant(grant)) {
+    if (is_valid_grant || grant_checked_now_to_be_valid) {
       setShowAdvanced(false);
       should_show_advanced = false;
       delete warnings["grant"];
@@ -689,7 +820,6 @@ export default function MyApp() {
 
     return is_valid;
   }
-
   const onGenerate = () => {
     const is_valid = onValidate();
 
@@ -701,7 +831,6 @@ export default function MyApp() {
     console.log("Form is valid - generating PDF");
     setRenderPDF(true);
   }
-
 
   if (render_pdf) {
     let advanced_section = null;
@@ -804,15 +933,15 @@ export default function MyApp() {
   } else {
     return (
       <div className="page">
-        <div className="pageTitle">Isambard Compliance Access Form</div>
+        <div className="pageTitle">Isambard Compliance Assessment Form</div>
         <div className="form">
           <EmailDialog value={email} onUpdate={setEmail} warnings={warnings} />
           <ProjectTitleDialog value={project_title} onUpdate={setProjectTitle} warnings={warnings} />
           <ProjectAbstractDialog value={project_abstract} onUpdate={setProjectAbstract} warnings={warnings} />
           <InstitutionDialog value={institution} onUpdate={setInstitution} warnings={warnings} />
-          <GrantDialog value={grant} onUpdate={setGrant} warnings={warnings} />
+          <GrantDialog value={grant} onUpdate={setGrant} grant_details={grant_details} warnings={warnings} />
           {advanced_dialog}
-          <ValidateButton onValidate={onValidate} warnings={warnings} />
+          <ValidateButton onValidate={onCheckGrant} warnings={warnings} />
           <GenerateButton onGenerate={onGenerate} is_valid={is_valid} />
         </div>
       </div>
