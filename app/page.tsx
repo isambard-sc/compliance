@@ -3,8 +3,7 @@
 import { useState } from 'react';
 import validator from 'validator';
 
-import ReactPDF, { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import ReactDOM from 'react-dom';
+import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFViewer } from '@react-pdf/renderer';
 
 import countryCodes from './resources/country_codes.json';
@@ -21,7 +20,9 @@ function isValidGrant(grant: string) {
   return true;
 }
 
-function handleCountryChange(countryCode: string, checked: boolean, countries, onUpdate) {
+function handleCountryChange(countryCode: string, checked: boolean,
+  countries: Record<string, boolean>,
+  onUpdate: (countries: Record<string, boolean>) => void) {
   if (checked) {
     countries[countryCode] = true;
   }
@@ -32,7 +33,7 @@ function handleCountryChange(countryCode: string, checked: boolean, countries, o
   onUpdate(countries);
 }
 
-function handleBooleanStringChange(checked: string, onUpdate) {
+function handleBooleanStringChange(checked: string, onUpdate: (value: number) => void) {
   if (checked === "yes") {
     onUpdate(1);
   }
@@ -41,11 +42,13 @@ function handleBooleanStringChange(checked: string, onUpdate) {
   }
 }
 
-function handleNumberStringChange(level: string, onUpdate) {
+function handleNumberStringChange(level: string, onUpdate: (value: number) => void) {
   onUpdate(parseInt(level));
 }
 
-function handleSectorChange(sector: string, checked: boolean, sectors, onUpdate) {
+function handleSectorChange(sector: string, checked: boolean,
+  sectors: Record<string, boolean>,
+  onUpdate: (sectors: Record<string, boolean>) => void) {
   if (checked) {
     if (sector === "None") {
       sectors = { "None": true };
@@ -83,22 +86,32 @@ function handleSectorChange(sector: string, checked: boolean, sectors, onUpdate)
 /// React components
 ///
 
-function EmailDialog({ value, onUpdate, warnings, email_is_valid, setEmailIsValid }) {
+interface Warnings {
+  email?: string;
+  project_title?: string;
+  project_abstract?: string;
+  institution?: string;
+  grant?: string;
+  countries_institution?: string;
+  countries_project?: string;
+  data?: string;
+  trl?: string;
+  sectors?: string;
+  validation?: string;
+}
+
+interface EmailDialogProps {
+  value: string;
+  onUpdate: (value: string) => void;
+  warnings: Warnings;
+}
+
+function EmailDialog({ value, onUpdate, warnings }: EmailDialogProps) {
   let warning = null;
 
   if (warnings["email"] !== undefined) {
     warning = <div className="warning">{warnings["email"]}</div>;
   }
-
-  const textChanged = (value: string) => {
-    if (validator.isEmail(value)) {
-      setEmailIsValid(true);
-    }
-    else {
-      setEmailIsValid(false);
-    }
-    onUpdate(value);
-  };
 
   let class_name = "default";
 
@@ -110,12 +123,18 @@ function EmailDialog({ value, onUpdate, warnings, email_is_valid, setEmailIsVali
     <div className="formItem">
       <div className="question">Please enter your email address</div>
       {warning}
-      <input className={class_name} type="email" onChange={(obj) => textChanged(obj.target.value)} value={value} />
+      <input className={class_name} type="email" onChange={(obj) => onUpdate(obj.target.value)} value={value} />
     </div>
   );
 }
 
-function ProjectTitleDialog({ value, onUpdate, warnings }) {
+interface ProjectTitleDialogProps {
+  value: string;
+  onUpdate: (value: string) => void;
+  warnings: Warnings;
+}
+
+function ProjectTitleDialog({ value, onUpdate, warnings }: ProjectTitleDialogProps) {
   let warning = null;
 
   if (warnings["project_title"] !== undefined) {
@@ -131,7 +150,13 @@ function ProjectTitleDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function ProjectAbstractDialog({ value, onUpdate, warnings }) {
+interface ProjectAbstractDialogProps {
+  value: string;
+  onUpdate: (value: string) => void;
+  warnings: Warnings;
+}
+
+function ProjectAbstractDialog({ value, onUpdate, warnings }: ProjectAbstractDialogProps) {
   let warning = null;
 
   if (warnings["project_abstract"] !== undefined) {
@@ -147,7 +172,13 @@ function ProjectAbstractDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function InstitutionDialog({ value, onUpdate, warnings }) {
+interface InstitutionDialogProps {
+  value: string;
+  onUpdate: (value: string) => void;
+  warnings: Warnings;
+}
+
+function InstitutionDialog({ value, onUpdate, warnings }: InstitutionDialogProps) {
   let warning = null;
 
   if (warnings["institution"] !== undefined) {
@@ -164,7 +195,13 @@ function InstitutionDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function GrantDialog({ value, onUpdate, warnings }) {
+interface GrantDialogProps {
+  value: string;
+  onUpdate: (value: string) => void;
+  warnings: Warnings;
+}
+
+function GrantDialog({ value, onUpdate, warnings }: GrantDialogProps) {
   let warning = null;
 
   if (warnings["grant"] !== undefined) {
@@ -182,7 +219,13 @@ function GrantDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function CountryInstitutionDialog({ value, onUpdate, warnings }) {
+interface CountryInstitutionDialogProps {
+  value: Record<string, boolean>;
+  onUpdate: (value: Record<string, boolean>) => void;
+  warnings: Warnings;
+}
+
+function CountryInstitutionDialog({ value, onUpdate, warnings }: CountryInstitutionDialogProps) {
   let warning = null;
 
   if (warnings["countries_institution"] !== undefined) {
@@ -209,7 +252,13 @@ function CountryInstitutionDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function CountryProjectDialog({ value, onUpdate, warnings }) {
+interface CountryProjectDialogProps {
+  value: Record<string, boolean>;
+  onUpdate: (value: Record<string, boolean>) => void;
+  warnings: Warnings;
+}
+
+function CountryProjectDialog({ value, onUpdate, warnings }: CountryProjectDialogProps) {
   let warning = null;
 
   if (warnings["countries_project"] !== undefined) {
@@ -235,7 +284,13 @@ function CountryProjectDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function DataDialog({ value, onUpdate, warnings }) {
+interface DataDialogProps {
+  value: number;
+  onUpdate: (value: number) => void;
+  warnings: Warnings;
+}
+
+function DataDialog({ value, onUpdate, warnings }: DataDialogProps) {
   let warning = null;
 
   if (warnings["data"] !== undefined) {
@@ -251,11 +306,13 @@ function DataDialog({ value, onUpdate, warnings }) {
       <div className="radioboxes">
         <div className="radiobox">
           <input type="radio" id="yes" name="data" value="yes"
+            checked={value === 1}
             onChange={(checked) => handleBooleanStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="yes">Yes</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="no" name="data" value="no"
+            checked={value === 0}
             onChange={(checked) => handleBooleanStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="no">No</label>
         </div>
@@ -264,7 +321,13 @@ function DataDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function TRLDialog({ value, onUpdate, warnings }) {
+interface TRLDialogProps {
+  value: number;
+  onUpdate: (value: number) => void;
+  warnings: Warnings;
+}
+
+function TRLDialog({ value, onUpdate, warnings }: TRLDialogProps) {
   let warning = null;
 
   if (warnings["trl"] !== undefined) {
@@ -278,46 +341,55 @@ function TRLDialog({ value, onUpdate, warnings }) {
       <div className="radioboxes">
         <div className="radiobox">
           <input type="radio" id="trl1" name="trl" value="1"
+            checked={value === 1}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl1">TRL 1: Basic principle observed and reported</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl2" name="trl" value="2"
+            checked={value === 2}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl2">TRL 2: Technology concept and/or application formed</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl3" name="trl" value="3"
+            checked={value === 3}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl3">TRL 3: Analytical and experimental critical function and/or characteristic proof of concept</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl4" name="trl" value="4"
+            checked={value === 4}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl4">TRL 4: Technology / component validation in a lab environment</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl5" name="trl" value="5"
+            checked={value === 5}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl5">TRL 5: Technology / component validated in relevant environment</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl6" name="trl" value="6"
+            checked={value === 6}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl6">TRL 6: System and subsystems model of prototype demonstration in relevant environment</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl7" name="trl" value="7"
+            checked={value === 7}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl7">TRL 7: System prototype demonstration in an operational environment</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl8" name="trl" value="8"
+            checked={value === 8}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl8">TRL 8: Actual system completed and qualified through testing</label>
         </div>
         <div className="radiobox">
           <input type="radio" id="trl9" name="trl" value="9"
+            checked={value === 9}
             onChange={(checked) => handleNumberStringChange(checked.target.value, onUpdate)} />
           <label className="radioLabel" htmlFor="trl9">TRL 9: Actual system field proven through successful operation</label>
         </div>
@@ -326,7 +398,13 @@ function TRLDialog({ value, onUpdate, warnings }) {
   );
 }
 
-function SectorDialog({ value, onUpdate, warnings }) {
+interface SectorDialogProps {
+  value: Record<string, boolean>;
+  onUpdate: (value: Record<string, boolean>) => void;
+  warnings: Warnings;
+}
+
+function SectorDialog({ value, onUpdate, warnings }: SectorDialogProps) {
   let warning = null;
 
   if (warnings["sectors"] !== undefined) {
@@ -344,109 +422,128 @@ function SectorDialog({ value, onUpdate, warnings }) {
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector1" name="sectors" value="Advanced Materials"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector1">Advanced Materials</label>
+          <label className="checkboxLabel" htmlFor="sector1">Advanced Materials</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector2" name="sectors" value="Advanced Robotics"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector2">Advanced Robotics</label>
+          <label className="checkboxLabel" htmlFor="sector2">Advanced Robotics</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector3" name="sectors" value="Artificial Intelligence"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector3">Artificial Intelligence</label>
+          <label className="checkboxLabel" htmlFor="sector3">Artificial Intelligence</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector4" name="sectors" value="Civil Nuclear"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector4">Civil Nuclear</label>
+          <label className="checkboxLabel" htmlFor="sector4">Civil Nuclear</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector5" name="sectors" value="Communications"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector5">Communications</label>
+          <label className="checkboxLabel" htmlFor="sector5">Communications</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector6" name="sectors" value="Computing Hardware"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector6">Computing Hardware</label>
+          <label className="checkboxLabel" htmlFor="sector6">Computing Hardware</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector7" name="sectors" value="Critical Suppliers to Government"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector7">Critical Suppliers to Government</label>
+          <label className="checkboxLabel" htmlFor="sector7">Critical Suppliers to Government</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector8" name="sectors" value="Cryptographic Authentication"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector8">Cryptographic Authentication</label>
+          <label className="checkboxLabel" htmlFor="sector8">Cryptographic Authentication</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector9" name="sectors" value="Data Infrastructure"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector9">Data Infrastructure</label>
+          <label className="checkboxLabel" htmlFor="sector9">Data Infrastructure</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector10" name="sectors" value="Defence"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector10">Defence</label>
+          <label className="checkboxLabel" htmlFor="sector10">Defence</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector11" name="sectors" value="Energy"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector11">Energy</label>
+          <label className="checkboxLabel" htmlFor="sector11">Energy</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector12" name="sectors" value="Military and Dual-Use"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector12">Military and Dual-Use</label>
+          <label className="checkboxLabel" htmlFor="sector12">Military and Dual-Use</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector13" name="sectors" value="Quantum Technologies"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector13">Quantum Technologies</label>
+          <label className="checkboxLabel" htmlFor="sector13">Quantum Technologies</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector14" name="sectors" value="Satellite and Space Technologies"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector14">Satellite and Space Technologies</label>
+          <label className="checkboxLabel" htmlFor="sector14">Satellite and Space Technologies</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector15" name="sectors" value="Suppliers to the Emergency Services"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector15">Suppliers to the Emergency Services</label>
+          <label className="checkboxLabel" htmlFor="sector15">Suppliers to the Emergency Services</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector16" name="sectors" value="Synthetic Biology"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector16">Synthetic Biology</label>
+          <label className="checkboxLabel" htmlFor="sector16">Synthetic Biology</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector17" name="sectors" value="Transport"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector17">Transport</label>
+          <label className="checkboxLabel" htmlFor="sector17">Transport</label>
         </div>
         <div className="sectorCheckbox">
           <input type="checkbox" id="sector18" name="sectors" value="None"
             onChange={(checked) => handleSectorChange(checked.target.value, checked.target.checked, value, onUpdate)} />
-          <label htmlFor="sector18">None of the above</label>
+          <label className="checkboxLabel" htmlFor="sector18">None of the above</label>
         </div>
       </div>
     </div>
   );
 }
 
-function ValidateButton({ onValidate }) {
-  return (
-    <button className="validateButton" onClick={onValidate}>Validate</button>
-  );
+interface ValidateButtonProps {
+  onValidate: () => void;
+  warnings: Warnings;
 }
 
-function GenerateButton({ onGenerate, is_valid }) {
+function ValidateButton({ onValidate, warnings }: ValidateButtonProps) {
+  if (warnings["validation"] !== undefined) {
+    return (
+      <div className="buttonContainer">
+        <div className="warning">{warnings["validation"]}</div>
+        <button className="validateButton" onClick={onValidate}>Validate</button>
+      </div>
+    );
+  }
+  else {
+    return (
+      <button className="validateButton" onClick={onValidate}>Validate</button>
+    );
+  }
+}
 
+interface GenerateButtonProps {
+  onGenerate: () => void;
+  is_valid: boolean;
+}
+
+function GenerateButton({ onGenerate, is_valid }: GenerateButtonProps) {
   if (is_valid) {
     return (
-      <button className="generateButton" onClick={onGenerate}>Generate</button>
+      <button className="generateButton" onClick={onGenerate}>Generate a PDF of the Compliance Report</button>
     );
   }
   else {
@@ -475,9 +572,9 @@ export default function MyApp() {
   const [sectors, setSectors] = useState({});
   const [show_advanced, setShowAdvanced] = useState(false);
   const [show_sectors, setShowSectors] = useState(false);
-  const [warnings, setWarnings] = useState({});
+
+  const [warnings, setWarnings] = useState<Warnings>({});
   const [is_valid, setIsValid] = useState(false);
-  const [email_is_valid, setEmailIsValid] = useState(false);
   const [render_pdf, setRenderPDF] = useState(false);
 
   let sector_dialog = null;
@@ -489,7 +586,7 @@ export default function MyApp() {
   let advanced_dialog = null;
 
   if (show_advanced) {
-    let setCheckedTrl = (level: number) => {
+    const setCheckedTrl = (level: number) => {
       setTrl(level);
 
       if (level >= 3) {
@@ -502,7 +599,7 @@ export default function MyApp() {
 
     advanced_dialog = (
       <div className="advancedForm">
-        <div className="advancedTitle">We need more details because we can't validate the grant
+        <div className="advancedTitle">We need more details because we can&apos;t validate the grant
           (or it is not specified)
         </div>
         <CountryInstitutionDialog value={countries_institution} onUpdate={setCountriesInstitution} warnings={warnings} />
@@ -514,8 +611,8 @@ export default function MyApp() {
     );
   }
 
-  let onValidate = () => {
-    let warnings = {};
+  const onValidate = () => {
+    const warnings: Warnings = {};
     let is_valid = true;
 
     if (!validator.isEmail(email)) {
@@ -581,14 +678,20 @@ export default function MyApp() {
       }
     }
 
+    if (is_valid) {
+      delete warnings["validation"];
+    } else {
+      warnings["validation"] = "The form is not valid - please fix the errors above to continue";
+    }
+
     setWarnings(warnings);
     setIsValid(is_valid);
 
     return is_valid;
   }
 
-  let onGenerate = () => {
-    let is_valid = onValidate();
+  const onGenerate = () => {
+    const is_valid = onValidate();
 
     if (!is_valid) {
       console.log("Form is not valid - look at the warnings to learn more.");
@@ -613,9 +716,9 @@ export default function MyApp() {
     }
 
     if (show_advanced) {
-      let countries_institution_list = Object.keys(countries_institution).join(", ");
-      let countries_project_list = Object.keys(countries_project).join(", ");
-      let sectors_list = Object.keys(sectors).join(", ");
+      const countries_institution_list = Object.keys(countries_institution).join(", ");
+      const countries_project_list = Object.keys(countries_project).join(", ");
+      const sectors_list = Object.keys(sectors).join(", ");
 
       let data_text = "No";
 
@@ -703,14 +806,13 @@ export default function MyApp() {
       <div className="page">
         <div className="pageTitle">Isambard Compliance Access Form</div>
         <div className="form">
-          <EmailDialog value={email} onUpdate={setEmail} warnings={warnings}
-            email_is_valid={email_is_valid} setEmailIsValid={setEmailIsValid} />
+          <EmailDialog value={email} onUpdate={setEmail} warnings={warnings} />
           <ProjectTitleDialog value={project_title} onUpdate={setProjectTitle} warnings={warnings} />
           <ProjectAbstractDialog value={project_abstract} onUpdate={setProjectAbstract} warnings={warnings} />
           <InstitutionDialog value={institution} onUpdate={setInstitution} warnings={warnings} />
           <GrantDialog value={grant} onUpdate={setGrant} warnings={warnings} />
           {advanced_dialog}
-          <ValidateButton onValidate={onValidate} />
+          <ValidateButton onValidate={onValidate} warnings={warnings} />
           <GenerateButton onGenerate={onGenerate} is_valid={is_valid} />
         </div>
       </div>
