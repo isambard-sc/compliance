@@ -9,9 +9,46 @@ import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import countryCodes from './resources/country_codes.json';
 
-///
-/// Functions that handle changes in state
-///
+interface CountryStatus {
+  is_us?: boolean;
+  is_canada?: boolean;
+  is_eu?: boolean;
+  is_gb?: boolean;
+  is_other?: boolean;
+  is_outside_uk?: boolean;
+}
+
+function getCountryStatus(countries: Record<string, boolean>) {
+  let status: CountryStatus = {};
+
+  for (const country in countries) {
+    if (country === "US") {
+      status["is_us"] = true;
+      status["is_outside_uk"] = true;
+    }
+    else if (country === "CA") {
+      status["is_canada"] = true;
+      status["is_outside_uk"] = true;
+    }
+    else if (country === "DE" || country === "FR" || country === "IT" || country === "ES" || country === "NL" || country === "BE" ||
+      country === "SE" || country === "AT" || country === "DK" || country === "FI" || country === "IE" || country === "GR" ||
+      country === "PT" || country === "CZ" || country === "SK" || country === "HU" || country === "PL" || country === "LT" ||
+      country === "LV" || country === "EE" || country === "SI" || country === "CY" || country === "MT" || country === "LU" ||
+      country === "BG" || country === "RO" || country === "HR") {
+      status["is_eu"] = true;
+      status["is_outside_uk"] = true;
+    }
+    else if (country === "GB") {
+      status["is_gb"] = true;
+    }
+    else {
+      status["is_other"] = true;
+      status["is_outside_uk"] = true;
+    }
+  }
+
+  return status;
+}
 
 interface GrantDetails {
   identifier?: string;
@@ -19,7 +56,7 @@ interface GrantDetails {
   xml_url?: string;
 }
 
-
+// Return whether or not this is a valid grant
 function isValidGrant(grant: string, onUpdate: (value: boolean) => void,
   current_grant_details: GrantDetails,
   setGrantDetails: (details: GrantDetails) => void) {
@@ -872,9 +909,43 @@ export default function MyApp() {
 
       let data_text = "No";
 
+      // we need to assess if this is green-flagged
+
+      // go through each of the countries and see if they are not in the
+      // automatically approved list
+      const institution_status = getCountryStatus(countries_institution);
+
+      if (institution_status.is_other) {
+        // need to review requests for projects hosted
+        // outside UK, EU, USA and Canada
+        green_flagged = false;
+      }
+
+      const project_status = getCountryStatus(countries_project);
+
+      if (project_status.is_other || project_status.is_us || project_status.is_canada) {
+        // need to review requests for projects accessing from
+        // outside of UK or EU
+
+        // (USA and Canada because of potential for export control issues)
+        green_flagged = false;
+      }
+
       if (data === 1) {
+        // Data from the US may be subject to export control
         data_text = "Yes";
         green_flagged = false;
+      }
+
+      if (sectors["None"] === undefined) {
+        // we need to review if the TRL is 3 or above
+        if (trl >= 3) {
+          if (institution_status.is_outside_uk || project_status.is_outside_uk) {
+            // need to review projects with TRL >= 3
+            // that are hosted or accessed from outside the UK
+            green_flagged = false;
+          }
+        }
       }
 
       let sectors_section = null;
