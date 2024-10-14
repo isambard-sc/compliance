@@ -4,7 +4,7 @@
   "homepage": "https://chryswoods.github.io/compliance",
   "private": true,
   "scripts": {
-    "predeploy": "npm run build",
+    "predeploy": "npm run build && touch ./out/.nojekyll",
     "deploy": "gh-pages -d out",
     "dev": "next dev",
     "build": "next build",
