@@ -1,10 +1,16 @@
+// @ts-nocheck
+
+// Need above due to this bug in PDFDownloadLink
+// https://github.com/diegomura/react-pdf/pull/2888
+// (will be fixed for >4.0.0 via PR)
+
 'use client'
 
 import { useState } from 'react';
 import validator from 'validator';
 import axios from 'axios';
 
-import { Page, Svg, Line, Text, View, Link, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import { Page, Svg, Line, Text, View, Link, Document, StyleSheet } from '@react-pdf/renderer';
 import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import countryCodes from './resources/country_codes.json';
@@ -21,7 +27,7 @@ interface CountryStatus {
 }
 
 function getCountryStatus(countries: Record<string, boolean>) {
-  let status: CountryStatus = {};
+  const status: CountryStatus = {};
 
   for (const country in countries) {
     if (country === "US") {
@@ -691,7 +697,7 @@ function ValidateButton({ onValidate, warnings }: ValidateButtonProps) {
 }
 
 interface GenerateButtonProps {
-  report: Element;
+  report: JSX.Element;
 }
 
 function GenerateButton({ report }: GenerateButtonProps) {
@@ -911,7 +917,7 @@ export default function MyApp() {
       }
     }
 
-    let review_reasons = [];
+    const review_reasons = [];
 
     if (show_advanced) {
       const countries_institution_list = Object.keys(countries_institution).join(", ");
