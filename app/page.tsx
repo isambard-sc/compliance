@@ -4,11 +4,10 @@ import { useState } from 'react';
 import validator from 'validator';
 import axios from 'axios';
 
-import { Page, Text, View, Document, StyleSheet } from '@react-pdf/renderer';
-import { PDFViewer } from '@react-pdf/renderer';
+import { Page, Text, View, Link, Document, StyleSheet } from '@react-pdf/renderer';
+import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
 
 import countryCodes from './resources/country_codes.json';
-import { encode } from 'punycode';
 
 ///
 /// Functions that handle changes in state
@@ -83,15 +82,15 @@ function isValidGrant(grant: string, onUpdate: (value: boolean) => void,
             console.log("No XML URL found " + error);
           }
 
-          onUpdate(true);
           setGrantDetails(grant_details);
+          onUpdate(true);
           return;
         }
         else {
           console.log("Grant code does not match: " + value + " vs " + grant);
           console.log(response.data);
-          onUpdate(false);
           setGrantDetails(grant_details);
+          onUpdate(false);
           return;
         }
       }
@@ -99,8 +98,8 @@ function isValidGrant(grant: string, onUpdate: (value: boolean) => void,
         console.log("Invalid grant");
         console.log(response.data);
         console.log(error);
-        onUpdate(false);
         setGrantDetails(grant_details);
+        onUpdate(false);
         return;
       }
     }
@@ -108,8 +107,8 @@ function isValidGrant(grant: string, onUpdate: (value: boolean) => void,
     .catch((error) => {
       console.log("Cannot reach UKRI API");
       console.log(error);
-      onUpdate(false);
       setGrantDetails(grant_details);
+      onUpdate(false);
       return;
     });
 }
@@ -261,7 +260,7 @@ function ProjectAbstractDialog({ value, onUpdate, warnings }: ProjectAbstractDia
     <div className="formItem">
       <div className="question">Please enter a description (or abstract) of your project</div>
       {warning}
-      <input type="text" onChange={(obj) => onUpdate(obj.target.value)} value={value} />
+      <textarea onChange={(obj) => onUpdate(obj.target.value)} value={value} />
     </div>
   );
 }
@@ -646,19 +645,19 @@ function ValidateButton({ onValidate, warnings }: ValidateButtonProps) {
 }
 
 interface GenerateButtonProps {
-  onGenerate: () => void;
-  is_valid: boolean;
+  report: Element;
 }
 
-function GenerateButton({ onGenerate, is_valid }: GenerateButtonProps) {
-  if (is_valid) {
-    return (
-      <button className="generateButton" onClick={onGenerate}>Generate a PDF of the Compliance Report</button>
-    );
-  }
-  else {
-    return null;
-  }
+function GenerateButton({ report }: GenerateButtonProps) {
+  return (
+    <div className="buttonContainer">
+      <PDFDownloadLink className="generateButton" document={report} fileName="isambard-compliance.pdf">
+        {({ blob, url, loading, error }) =>
+          loading ? 'Generating Complicance Report...' : 'Download Compliance Report'
+        }
+      </PDFDownloadLink>
+    </div>
+  )
 }
 
 ///
@@ -682,12 +681,10 @@ export default function MyApp() {
   const [sectors, setSectors] = useState({});
   const [show_advanced, setShowAdvanced] = useState(false);
   const [show_sectors, setShowSectors] = useState(false);
-  const [is_valid_grant, setIsValidGrant] = useState(false);
   const [grant_details, setGrantDetails] = useState({});
+  const [show_generate, setShowGenerate] = useState(false);
 
   const [warnings, setWarnings] = useState<Warnings>({});
-  const [is_valid, setIsValid] = useState(false);
-  const [render_pdf, setRenderPDF] = useState(false);
 
   let sector_dialog = null;
 
@@ -723,26 +720,23 @@ export default function MyApp() {
     );
   }
 
-  let grant_checked_now_to_be_valid = false;
+  // this may be updated by the grant validation function
+  let local_grant = grant;
 
   const onCheckGrant = () => {
 
     const onUpdate = (value: boolean) => {
       if (value) {
-        setIsValidGrant(true);
-        grant_checked_now_to_be_valid = true;
-        onValidate();
+        onValidate(true);
       } else {
-        setIsValidGrant(false);
-        grant_checked_now_to_be_valid = false;
-        onValidate();
+        onValidate(false);
       }
     }
 
-    isValidGrant(grant, onUpdate, grant_details, setGrantDetails);
+    isValidGrant(local_grant, onUpdate, grant_details, setGrantDetails);
   }
 
-  const onValidate = () => {
+  const onValidate = (grant_is_valid: boolean) => {
     const warnings: Warnings = {};
     let is_valid = true;
 
@@ -768,7 +762,7 @@ export default function MyApp() {
 
     let should_show_advanced = show_advanced;
 
-    if (is_valid_grant || grant_checked_now_to_be_valid) {
+    if (grant_is_valid) {
       setShowAdvanced(false);
       should_show_advanced = false;
       delete warnings["grant"];
@@ -777,6 +771,7 @@ export default function MyApp() {
       // this is the first time we haven't specified the grant
       is_valid = false;
       warnings["grant"] = "Invalid grant code";
+      should_show_advanced = true;
       setShowAdvanced(true);
     }
 
@@ -811,28 +806,20 @@ export default function MyApp() {
 
     if (is_valid) {
       delete warnings["validation"];
+      setShowGenerate(true);
     } else {
       warnings["validation"] = "The form is not valid - please fix the errors above to continue";
+      setShowGenerate(false);
     }
 
     setWarnings(warnings);
-    setIsValid(is_valid);
-
-    return is_valid;
-  }
-  const onGenerate = () => {
-    const is_valid = onValidate();
-
-    if (!is_valid) {
-      console.log("Form is not valid - look at the warnings to learn more.");
-      return;
-    }
-
-    console.log("Form is valid - generating PDF");
-    setRenderPDF(true);
   }
 
-  if (render_pdf) {
+  let generate_button = null;
+  let validate_button = null;
+
+  if (show_generate) {
+    // generate the pdf document and attach it to the download button
     let advanced_section = null;
     let grant_section = null;
 
@@ -840,7 +827,9 @@ export default function MyApp() {
 
     if (grant !== "") {
       grant_section = (
-        <Text>Grant number: {grant}</Text>
+        <Text><Link src={grant_details.url}>{grant}</Link>&nbsp;
+          &nbsp; <Link src={grant_details.xml_url}>metadata</Link>
+        </Text>
       );
     }
 
@@ -878,7 +867,10 @@ export default function MyApp() {
     }
 
     const styles = StyleSheet.create({
-      page: { backgroundColor: 'white', flexDirection: 'column' },
+      page: {
+        backgroundColor: 'white', flexDirection: 'column',
+        size: "A4"
+      },
       section: {
         textAlign: 'left', margin: 30,
         padding: 10, flexGrow: 1,
@@ -907,44 +899,78 @@ export default function MyApp() {
       );
     }
 
-    return (
-      <PDFViewer style={{ width: "100%", height: "100vh" }}>
-        <Document>
-          <Page size="A4" style={styles.page}>
-            <View style={styles.section}>
-              <Text style={{ fontSize: "14pt" }}>Isambard Compliance Assessment</Text>
-              <Text>   </Text>
-              {next_step}
-              <Text>   </Text>
-              <Text>{email}</Text>
-              <Text>{institution}</Text>
-              {grant_section}
-              <Text>   </Text>
-              <Text>{project_title}</Text>
-              <Text>   </Text>
-              <Text>{project_abstract}</Text>
-              <Text>   </Text>
-              {advanced_section}
-            </View>
-          </Page>
-        </Document>
-      </PDFViewer>
+    const compliance_report = (
+      <Document title="Isambard Compliance Assessment"
+        author="Isambard Compliance Tool"
+        subject="Isambard Compliance Assessment"
+      >
+        <Page size="A4" style={styles.page}>
+          <View style={styles.section}>
+            <Text style={{ fontSize: "14pt" }}>Isambard Compliance Assessment</Text>
+            <Text>   </Text>
+            {next_step}
+            <Text>   </Text>
+            <Text>{email}</Text>
+            <Text>{institution}</Text>
+            {grant_section}
+            <Text>   </Text>
+            <Text>{project_title}</Text>
+            <Text>   </Text>
+            <Text>{project_abstract}</Text>
+            <Text>   </Text>
+            {advanced_section}
+          </View>
+        </Page>
+      </Document>
     );
-  } else {
-    return (
-      <div className="page">
-        <div className="pageTitle">Isambard Compliance Assessment Form</div>
-        <div className="form">
-          <EmailDialog value={email} onUpdate={setEmail} warnings={warnings} />
-          <ProjectTitleDialog value={project_title} onUpdate={setProjectTitle} warnings={warnings} />
-          <ProjectAbstractDialog value={project_abstract} onUpdate={setProjectAbstract} warnings={warnings} />
-          <InstitutionDialog value={institution} onUpdate={setInstitution} warnings={warnings} />
-          <GrantDialog value={grant} onUpdate={setGrant} grant_details={grant_details} warnings={warnings} />
-          {advanced_dialog}
-          <ValidateButton onValidate={onCheckGrant} warnings={warnings} />
-          <GenerateButton onGenerate={onGenerate} is_valid={is_valid} />
-        </div>
-      </div>
-    );
+
+    generate_button = <GenerateButton report={compliance_report} />
   }
+  else {
+    validate_button = <ValidateButton onValidate={onCheckGrant} warnings={warnings} />;
+  }
+
+  const changedEmail = (value: string) => {
+    setShowGenerate(false);
+    setEmail(value);
+  };
+
+  const changedProjectTitle = (value: string) => {
+    setShowGenerate(false);
+    setProjectTitle(value);
+  };
+
+  const changedProjectAbstract = (value: string) => {
+    setShowGenerate(false);
+    setProjectAbstract(value);
+  };
+
+  const changedInstitution = (value: string) => {
+    setShowGenerate(false);
+    setInstitution(value);
+  };
+
+  const changedGrant = (value: string) => {
+    value = value.trim();
+    setShowGenerate(false);
+    setGrant(value);
+    local_grant = value;
+  };
+
+  return (
+    <div className="page">
+      <div className="pageTitle">Isambard Compliance Assessment Form</div>
+      <div className="form">
+        <EmailDialog value={email} onUpdate={changedEmail} warnings={warnings} />
+        <ProjectTitleDialog value={project_title} onUpdate={changedProjectTitle} warnings={warnings} />
+        <ProjectAbstractDialog value={project_abstract} onUpdate={changedProjectAbstract} warnings={warnings} />
+        <InstitutionDialog value={institution} onUpdate={changedInstitution} warnings={warnings} />
+        <GrantDialog value={grant} onUpdate={changedGrant} grant_details={grant_details} warnings={warnings} />
+        {advanced_dialog}
+        {validate_button}
+        {generate_button}
+      </div>
+    </div>
+  );
 }
+
