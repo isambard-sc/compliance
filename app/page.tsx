@@ -4,8 +4,8 @@ import { useState } from 'react';
 import validator from 'validator';
 import axios from 'axios';
 
-import { Page, Text, View, Link, Document, StyleSheet } from '@react-pdf/renderer';
-import { PDFViewer, PDFDownloadLink } from '@react-pdf/renderer';
+import { Page, Svg, Line, Text, View, Link, Document, StyleSheet, Font } from '@react-pdf/renderer';
+import { PDFDownloadLink } from '@react-pdf/renderer';
 
 import countryCodes from './resources/country_codes.json';
 
@@ -689,7 +689,12 @@ export default function MyApp() {
   let sector_dialog = null;
 
   if (show_sectors) {
-    sector_dialog = <SectorDialog value={sectors} onUpdate={setSectors} warnings={warnings} />;
+    const changedSectors = (sectors: Record<string, boolean>) => {
+      setShowGenerate(false);
+      setSectors(sectors);
+    };
+
+    sector_dialog = <SectorDialog value={sectors} onUpdate={changedSectors} warnings={warnings} />;
   }
 
   let advanced_dialog = null;
@@ -706,15 +711,35 @@ export default function MyApp() {
       }
     }
 
+    const changedCountriesInstitution = (countries: Record<string, boolean>) => {
+      setShowGenerate(false);
+      setCountriesInstitution(countries);
+    }
+
+    const changedCountriesProject = (countries: Record<string, boolean>) => {
+      setShowGenerate(false);
+      setCountriesProject(countries);
+    }
+
+    const changedData = (value: number) => {
+      setShowGenerate(false);
+      setData(value);
+    }
+
+    const changedTrl = (level: number) => {
+      setShowGenerate(false);
+      setCheckedTrl(level);
+    }
+
     advanced_dialog = (
       <div className="advancedForm">
         <div className="advancedTitle">We need more details because we can&apos;t validate the grant
           (or it is not specified)
         </div>
-        <CountryInstitutionDialog value={countries_institution} onUpdate={setCountriesInstitution} warnings={warnings} />
-        <CountryProjectDialog value={countries_project} onUpdate={setCountriesProject} warnings={warnings} />
-        <DataDialog value={data} onUpdate={setData} warnings={warnings} />
-        <TRLDialog value={trl} onUpdate={setCheckedTrl} warnings={warnings} />
+        <CountryInstitutionDialog value={countries_institution} onUpdate={changedCountriesInstitution} warnings={warnings} />
+        <CountryProjectDialog value={countries_project} onUpdate={changedCountriesProject} warnings={warnings} />
+        <DataDialog value={data} onUpdate={changedData} warnings={warnings} />
+        <TRLDialog value={trl} onUpdate={changedTrl} warnings={warnings} />
         {sector_dialog}
       </div>
     );
@@ -826,11 +851,18 @@ export default function MyApp() {
     let green_flagged = true;
 
     if (grant !== "") {
-      grant_section = (
-        <Text><Link src={grant_details.url}>{grant}</Link>&nbsp;
-          &nbsp; <Link src={grant_details.xml_url}>metadata</Link>
-        </Text>
-      );
+      if (grant_details.url === undefined) {
+        grant_section = (
+          <Text>Grant code: {grant} &nbsp;<Text style={{ color: "red" }}>NOT VALIDATED</Text></Text>
+        )
+      }
+      else {
+        grant_section = (
+          <Text><Link src={grant_details.url}>{grant}</Link>&nbsp;
+            &nbsp; <Link src={grant_details.xml_url}>metadata</Link>
+          </Text>
+        );
+      }
     }
 
     if (show_advanced) {
@@ -869,12 +901,13 @@ export default function MyApp() {
     const styles = StyleSheet.create({
       page: {
         backgroundColor: 'white', flexDirection: 'column',
-        size: "A4"
+        size: "A4",
       },
       section: {
         textAlign: 'left', margin: 30,
         padding: 10, flexGrow: 1,
         fontSize: "10pt",
+        fontFamily: 'Helvetica',
         lineHeight: 1.5,
       }
     });
@@ -908,20 +941,32 @@ export default function MyApp() {
           <View style={styles.section}>
             <Text style={{ fontSize: "14pt" }}>Isambard Compliance Assessment</Text>
             <Text>   </Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
             {next_step}
+            <Svg height="2" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
             <Text>   </Text>
-            <Text>{email}</Text>
-            <Text>{institution}</Text>
+            <Text>{email.trim()}</Text>
+            <Text>{institution.trim()}</Text>
             {grant_section}
-            <Text>   </Text>
-            <Text>{project_title}</Text>
-            <Text>   </Text>
-            <Text>{project_abstract}</Text>
-            <Text>   </Text>
             {advanced_section}
+            <Text>   </Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text style={{ color: "rgb(50,50,50)", fontSize: "12pt" }}>{project_title.trim()}</Text>
+            <Text>   </Text>
+            <Text>{project_abstract.trim()}</Text>
+            <Text>   </Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
           </View>
         </Page>
-      </Document>
+      </Document >
     );
 
     generate_button = <GenerateButton report={compliance_report} />
