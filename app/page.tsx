@@ -16,6 +16,8 @@ interface CountryStatus {
   is_gb?: boolean;
   is_other?: boolean;
   is_outside_uk?: boolean;
+  is_only_uk?: boolean;
+  is_only_us?: boolean;
 }
 
 function getCountryStatus(countries: Record<string, boolean>) {
@@ -45,6 +47,13 @@ function getCountryStatus(countries: Record<string, boolean>) {
       status["is_other"] = true;
       status["is_outside_uk"] = true;
     }
+  }
+
+  if (status["is_gb"] && (Object.keys(countries).length === 1)) {
+    status["is_only_uk"] = true;
+  }
+  else if (status["is_us"] && (Object.keys(countries).length === 1)) {
+    status["is_only_us"] = true;
   }
 
   return status;
@@ -902,6 +911,8 @@ export default function MyApp() {
       }
     }
 
+    let review_reasons = [];
+
     if (show_advanced) {
       const countries_institution_list = Object.keys(countries_institution).join(", ");
       const countries_project_list = Object.keys(countries_project).join(", ");
@@ -918,23 +929,45 @@ export default function MyApp() {
       if (institution_status.is_other) {
         // need to review requests for projects hosted
         // outside UK, EU, USA and Canada
+        // (potential trusted research issue)
         green_flagged = false;
+        review_reasons.push("Potential trusted research issue");
       }
 
       const project_status = getCountryStatus(countries_project);
 
-      if (project_status.is_other || project_status.is_us || project_status.is_canada) {
+      if (project_status.is_other || project_status.is_eu) {
         // need to review requests for projects accessing from
         // outside of UK or EU
 
-        // (USA and Canada because of potential for export control issues)
+        // (potential UK export control issue)
         green_flagged = false;
+        review_reasons.push("Potential UK export control issue");
+      }
+
+      let potential_export_control_issue = false;
+
+      if (institution_status.is_us && (!project_status.is_only_us)) {
+        // need to review requests for projects involving the US
+        // but accessing from outside the US
+        potential_export_control_issue = true;
+      }
+      else if (project_status.is_us || institution_status.is_canada) {
+        // need to check for potential export control issues
+        potential_export_control_issue = true;
+      }
+
+      if (potential_export_control_issue) {
+        // these need manual review
+        green_flagged = false;
+        review_reasons.push("Potential international export control issue");
       }
 
       if (data === 1) {
         // Data from the US may be subject to export control
         data_text = "Yes";
         green_flagged = false;
+        review_reasons.push("Potential US export control issue");
       }
 
       if (sectors["None"] === undefined) {
@@ -944,6 +977,7 @@ export default function MyApp() {
             // need to review projects with TRL >= 3
             // that are hosted or accessed from outside the UK
             green_flagged = false;
+            review_reasons.push("Potential NSIA issue");
           }
         }
       }
@@ -984,6 +1018,7 @@ export default function MyApp() {
     });
 
     let next_step = null;
+    let review_issues = null;
 
     if (green_flagged) {
       next_step = (
@@ -1001,6 +1036,14 @@ export default function MyApp() {
           submitting your research application.
         </Text>
       );
+      review_issues = (
+        <View>
+          <Svg height="2" width="100%">
+            <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+          </Svg>
+          <Text>{review_reasons.join(", ")}</Text>
+        </View>
+      )
     }
 
     const compliance_report = (
@@ -1016,6 +1059,7 @@ export default function MyApp() {
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
             </Svg>
             {next_step}
+            {review_issues}
             <Svg height="2" width="100%">
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
             </Svg>
