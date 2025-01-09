@@ -1,7 +1,7 @@
 {
   "name": "compliance",
   "version": "0.1.0",
-  "homepage": "https://chryswoods.github.io/compliance",
+  "homepage": "https://compliance.isambard.ac.uk",
   "private": true,
   "scripts": {
     "predeploy": "npm run build && touch ./out/.nojekyll",
