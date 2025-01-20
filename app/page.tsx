@@ -311,6 +311,11 @@ function ProjectAbstractDialog({ value, onUpdate, warnings }: ProjectAbstractDia
   return (
     <div className="formItem">
       <div className="question">Please enter a description (or abstract) of your project</div>
+      <div className="question">
+        This should include details of any funding that will support this project,
+        the purpose of the research conducted on Isambard, how the data
+        processed will add to the research, and the purpose of any outputs.
+      </div>
       {warning}
       <textarea onChange={(obj) => onUpdate(obj.target.value)} value={value} />
     </div>
@@ -372,6 +377,12 @@ function GrantDialog({ value, onUpdate, grant_details, warnings }: GrantDialogPr
       <div className="question">If your project has a UKRI grant code associated with it, please
         enter it here. Only enter a single grant code. If your project does not have a
         UKRI grant associated, then leave this field blank.
+      </div>
+      <div className="question">
+        Note, if your project is supported by several UKRI grants, then put the code of the
+        primary grant here, and add the other codes in the project description above.
+        If your project is supported by other funders, then please leave this field blank,
+        and add the funding details to the project description above.
       </div>
       {warning}
       <input type="text" onChange={(obj) => onUpdate(obj.target.value)} value={value} />
