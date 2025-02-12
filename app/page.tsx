@@ -912,6 +912,7 @@ export default function MyApp() {
     let grant_section = null;
 
     let green_flagged = true;
+    let grant_validated = false;
 
     if (grant !== "") {
       if (grant_details.url === undefined) {
@@ -920,6 +921,7 @@ export default function MyApp() {
         )
       }
       else {
+        grant_validated = true;
         grant_section = (
           <Text style={{ color: "green" }}>SUCESSFULLY VALIDATED&nbsp; <Link src={grant_details.xml_url}>grant metadata</Link>
           </Text>
@@ -1047,7 +1049,6 @@ export default function MyApp() {
           Please download and save this PDF and upload it with your research application
         </Text>
       );
-
     }
     else {
       next_step = (
@@ -1065,7 +1066,9 @@ export default function MyApp() {
           <Text>{review_reasons.join(", ")}</Text>
         </View>
       )
+    }
 
+    if (!grant_validated) {
       institution_answer = Object.keys(countries_institution).join(", ");
       country_answer = Object.keys(countries_project).join(", ");
       data_answer = data === 1 ? "Yes" : "No";
