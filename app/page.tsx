@@ -921,8 +921,7 @@ export default function MyApp() {
       }
       else {
         grant_section = (
-          <Text><Link src={grant_details.url}>{grant}</Link>&nbsp;
-            &nbsp; <Link src={grant_details.xml_url}>metadata</Link>
+          <Text style={{ color: "green" }}>SUCESSFULLY VALIDATED&nbsp; <Link src={grant_details.xml_url}>grant metadata</Link>
           </Text>
         );
       }
@@ -1036,6 +1035,11 @@ export default function MyApp() {
 
     let next_step = null;
     let review_issues = null;
+    let institution_answer = "N/A as the grant code was validated successfully.";
+    let country_answer = "N/A as the grant code was validated successfully.";
+    let data_answer = "N/A as the grant code was validated successfully.";
+    let trl_answer = "N/A as the grant code was validated successfully.";
+    let sectors_answer = "N/A as the grant code was validated successfully.";
 
     if (green_flagged) {
       next_step = (
@@ -1043,14 +1047,14 @@ export default function MyApp() {
           Please download and save this PDF and upload it with your research application
         </Text>
       );
+
     }
     else {
       next_step = (
         <Text style={{ color: "red", fontSize: "12pt" }}>
-          Please download and save this PDF and email it to your research office,
-          together with a copy of your project proposal. They will be able
-          to advise whether you need to take any further action before
-          submitting your research application.
+          Please download and save this PDF and upload it with your research
+          application. You should also get in touch with your
+          research office as your project may need a more detailed assessment.
         </Text>
       );
       review_issues = (
@@ -1061,6 +1065,17 @@ export default function MyApp() {
           <Text>{review_reasons.join(", ")}</Text>
         </View>
       )
+
+      institution_answer = Object.keys(countries_institution).join(", ");
+      country_answer = Object.keys(countries_project).join(", ");
+      data_answer = data === 1 ? "Yes" : "No";
+      trl_answer = trl;
+
+      if (trl >= 3) {
+        sectors_answer = Object.keys(sectors).join(", ");
+      } else {
+        sectors_answer = "N/A as the TRL level was not sufficiently high";
+      }
     }
 
     const compliance_report = (
@@ -1077,22 +1092,57 @@ export default function MyApp() {
             </Svg>
             {next_step}
             {review_issues}
-            <Svg height="2" width="100%">
-              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
-            </Svg>
-            <Text>   </Text>
-            <Text>{email.trim()}</Text>
-            <Text>{institution.trim()}</Text>
-            {grant_section}
-            {advanced_section}
-            <Text>   </Text>
             <Svg height="5" width="100%">
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
             </Svg>
-            <Text style={{ color: "rgb(50,50,50)", fontSize: "12pt" }}>{project_title.trim()}</Text>
-            <Text>   </Text>
+            <Text>1. Email address:</Text>
+            <Text>{email.trim()}</Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>2. Project title:</Text>
+            <Text>{project_title.trim()}</Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>3. Project abstract:</Text>
             <Text>{project_abstract.trim()}</Text>
-            <Text>   </Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>4. Legal name of the institution that is responsible for this project:</Text>
+            <Text>{institution.trim()}</Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>5. Grant code:</Text>
+            <Text>{grant}</Text>
+            {grant_section}
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>6. Country/ies the institution(s) involved in the project has a presence in:</Text>
+            <Text>{institution_answer}</Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>7. Country/ies from which access to Isambard services will be from:</Text>
+            <Text>{country_answer}</Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>8. Does any of the data loaded into Isambard services originate from the USA?</Text>
+            <Text>{data_answer}</Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>9. Highest expected Technology Readiness Level (TRL) of the outputs of this project:</Text>
+            <Text>{trl_answer}</Text>
+            <Svg height="5" width="100%">
+              <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
+            </Svg>
+            <Text>10. Sectors this project relates to:</Text>
+            <Text>{sectors_answer}</Text>
             <Svg height="5" width="100%">
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
             </Svg>
