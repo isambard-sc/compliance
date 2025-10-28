@@ -313,7 +313,7 @@ function ProjectAbstractDialog({ value, onUpdate, warnings }: ProjectAbstractDia
       <div className="question">Please enter a description (or abstract) of your project</div>
       <div className="question">
         This should include details of any funding that will support this project,
-        the purpose of the research conducted on Isambard, how the data
+        the purpose of the research conducted, how the data
         processed will add to the research, and the purpose of any outputs.
       </div>
       {warning}
@@ -439,7 +439,7 @@ function CountryProjectDialog({ value, onUpdate, warnings }: CountryProjectDialo
 
   return (
     <div className="formItem">
-      <div className="question">Which country/ies are you intending to conduct access to Isambard
+      <div className="question">Which country/ies are you intending to access
         services from? Please select ALL that apply
       </div>
       {warning}
@@ -471,7 +471,7 @@ function DataDialog({ value, onUpdate, warnings }: DataDialogProps) {
 
   return (
     <div className="formItem">
-      <div className="question">Does any of the data loaded into Isambard services originate
+      <div className="question">Does any of the data loaded into the services originate
         from the USA?
       </div>
       {warning}
@@ -714,7 +714,7 @@ interface GenerateButtonProps {
 function GenerateButton({ report }: GenerateButtonProps) {
   return (
     <div className="buttonContainer">
-      <PDFDownloadLink className="generateButton" document={report} fileName="isambard-compliance.pdf">
+      <PDFDownloadLink className="generateButton" document={report} fileName="compliance.pdf">
         {({ blob, url, loading, error }) =>
           loading ? 'Generating Complicance Report...' : 'Download Compliance Report'
         }
@@ -1082,13 +1082,13 @@ export default function MyApp() {
     }
 
     const compliance_report = (
-      <Document title="Isambard Compliance Assessment"
-        author="Isambard Compliance Tool"
-        subject="Isambard Compliance Assessment"
+      <Document title="Compliance Assessment"
+        author="Compliance Tool"
+        subject="Compliance Assessment"
       >
         <Page size="A4" style={styles.page}>
           <View style={styles.section}>
-            <Text style={{ fontSize: "14pt" }}>Isambard Compliance Assessment</Text>
+            <Text style={{ fontSize: "14pt" }}>Compliance Assessment</Text>
             <Text>   </Text>
             <Svg height="5" width="100%">
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
@@ -1129,12 +1129,12 @@ export default function MyApp() {
             <Svg height="5" width="100%">
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
             </Svg>
-            <Text>7. Country/ies from which access to Isambard services will be from:</Text>
+            <Text>7. Country/ies from which access to the services will be from:</Text>
             <Text>{country_answer}</Text>
             <Svg height="5" width="100%">
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
             </Svg>
-            <Text>8. Does any of the data loaded into Isambard services originate from the USA?</Text>
+            <Text>8. Does any of the data loaded into the services originate from the USA?</Text>
             <Text>{data_answer}</Text>
             <Svg height="5" width="100%">
               <Line x1="0" y1="0" x2="500" y2="0" strokeWidth={2} stroke="rgb(150,150,150)" />
@@ -1189,7 +1189,7 @@ export default function MyApp() {
 
   return (
     <div className="page">
-      <div className="pageTitle">Isambard Compliance Assessment Form</div>
+      <div className="pageTitle">Compliance Assessment Form</div>
       <div className="form">
         <EmailDialog value={email} onUpdate={changedEmail} warnings={warnings} />
         <ProjectTitleDialog value={project_title} onUpdate={changedProjectTitle} warnings={warnings} />
